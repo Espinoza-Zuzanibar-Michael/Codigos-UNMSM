@@ -1,1 +1,22 @@
+#include <iostream>
+using namespace std;
 
+double calcularMedia(double v[], int n) {
+    double suma = 0;
+    
+    for (int i = 0; i < n; i++) {
+        suma += v[i];
+    }
+    
+    return suma / n;
+}
+
+int main() {
+    int n = 5;
+    double miVector[5] = {10.5, 20.0, 15.5, 30.0, 5.0};
+    
+    double media = calcularMedia(miVector, n);
+    cout << "La media del vector es: " << media << endl;
+    
+    return 0;
+}
