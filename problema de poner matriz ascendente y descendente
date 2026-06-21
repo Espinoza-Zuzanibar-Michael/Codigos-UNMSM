@@ -1,1 +1,70 @@
+#include <iostream>
+using namespace std;
 
+const int N = 5;
+
+void ordenarMatriz(int arr[], int size, bool ascendente) {
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = 0; j < size - i - 1; j++) {
+            if (ascendente) {
+                if (arr[j] > arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            } else {
+                if (arr[j] < arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
+}
+
+void imprimirComoMatriz(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        cout << arr[i] << "\t";
+        if ((i + 1) % N == 0) {
+            cout << endl;
+        }
+    }
+}
+
+int main() {
+    int matriz[N][N];
+    int arr[N * N];
+    int idx = 0;
+
+    cout << "Ingrese los 25 numeros para la matriz 5x5:" << endl;
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            cin >> matriz[i][j];
+            arr[idx] = matriz[i][j];
+            idx++;
+        }
+    }
+
+    int opcion;
+    cout << "\nComo desea ordenar la matriz?\n";
+    cout << "1. Ascendente\n";
+    cout << "2. Descendente\n";
+    cout << "3. Ambos\n";
+    cout << "Ingrese opcion (1-3): ";
+    cin >> opcion;
+
+    if (opcion == 1 || opcion == 3) {
+        cout << "\nOrden Ascendente:" << endl;
+        ordenarMatriz(arr, N * N, true);
+        imprimirComoMatriz(arr, N * N);
+    }
+
+    if (opcion == 2 || opcion == 3) {
+        cout << "\nOrden Descendente:" << endl;
+        ordenarMatriz(arr, N * N, false);
+        imprimirComoMatriz(arr, N * N);
+    }
+
+    return 0;
+}
