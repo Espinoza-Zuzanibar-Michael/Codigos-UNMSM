@@ -1,1 +1,36 @@
+#include <iostream>
+using namespace std;
 
+const int MAX_COLS = 10;
+
+void buscarMinMaxMatriz(int matriz[][MAX_COLS], int m, int n) {
+    int min = matriz[0][0];
+    int max = matriz[0][0];
+    
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            if (matriz[i][j] < min) {
+                min = matriz[i][j];
+            }
+            if (matriz[i][j] > max) {
+                max = matriz[i][j];
+            }
+        }
+    }
+    
+    cout << "El menor elemento es: " << min << endl;
+    cout << "El mayor elemento es: " << max << endl;
+}
+
+int main() {
+    int m = 2;
+    int n = 3;
+    int miMatriz[2][MAX_COLS] = {
+        {5, 12, 3},
+        {8, 1, 9}
+    };
+    
+    buscarMinMaxMatriz(miMatriz, m, n);
+    
+    return 0;
+}
