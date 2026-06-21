@@ -1,2 +1,10 @@
-# Codigos-UNMSM
-Repositorio para el almacenamiento, organización y control de versiones de códigos, algoritmos y tareas académicas desarrolladas durante la carrera.
+---
+
+# Mis Códigos Académicos - UNMSM
+
+Este repositorio contiene la organización, almacenamiento de los códigos, y tareas desarrolladas durante mi formación en la carrera de **Computación Científica** en la Universidad Nacional Mayor de San Marcos.
+
+---
+
+
+
