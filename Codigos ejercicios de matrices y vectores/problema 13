@@ -1,1 +1,58 @@
+#include <iostream>
+using namespace std;
 
+const int MAX_COLS = 10;
+
+void copiarBordesHorario(int matriz[][MAX_COLS], int m, int n, int v[]) {
+    int idx = 0;
+    
+    for (int j = 0; j < n; j++) {
+        v[idx] = matriz[0][j];
+        idx++;
+    }
+    
+    for (int i = 1; i < m; i++) {
+        v[idx] = matriz[i][n - 1];
+        idx++;
+    }
+    
+    if (m > 1) {
+        for (int j = n - 2; j >= 0; j--) {
+            v[idx] = matriz[m - 1][j];
+            idx++;
+        }
+    }
+    
+    if (n > 1) {
+        for (int i = m - 2; i > 0; i--) {
+            v[idx] = matriz[i][0];
+            idx++;
+        }
+    }
+}
+
+int main() {
+    int m = 3;
+    int n = 4;
+    int miMatriz[3][MAX_COLS] = {
+        {1,  2,  3,  4},
+        {5,  6,  7,  8},
+        {9, 10, 11, 12}
+    };
+    
+    int totalBordes = (m * 2) + ((n - 2) * 2);
+    if (m == 1) totalBordes = n;
+    else if (n == 1) totalBordes = m;
+    
+    int vectorResultado[20]; 
+    
+    copiarBordesHorario(miMatriz, m, n, vectorResultado);
+    
+    cout << "Elementos de los bordes en sentido horario: ";
+    for (int i = 0; i < totalBordes; i++) {
+        cout << vectorResultado[i] << " ";
+    }
+    cout << endl;
+    
+    return 0;
+}
