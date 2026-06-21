@@ -1,1 +1,25 @@
+#include <iostream>
+using namespace std;
 
+void productoPorNumero(double v[], double numero, double resultado[], int n) {
+    for (int i = 0; i < n; i++) {
+        resultado[i] = v[i] * numero;
+    }
+}
+
+int main() {
+    int n = 4;
+    double escalar = 3.0;
+    double miVector[4] = {1.0, -2.0, 4.0, 5.0};
+    double vectorResultado[4];
+    
+    productoPorNumero(miVector, escalar, vectorResultado, n);
+    
+    cout << "El vector resultante es: ";
+    for (int i = 0; i < n; i++) {
+        cout << vectorResultado[i] << " ";
+    }
+    cout << endl;
+    
+    return 0;
+}
