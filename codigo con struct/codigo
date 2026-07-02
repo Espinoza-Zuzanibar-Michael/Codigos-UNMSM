@@ -1,1 +1,151 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <iomanip>
+#include <string> 
 
+using namespace std;
+
+struct Producto {
+    string nombre;
+    double precio;
+    int cantidad;
+};
+
+int main() {
+
+    double porcentajeDescuento;
+    int opcionRegla;
+    int cantidadMinima = 0;
+
+    do {
+        cout << "Introduce el porcentaje de descuento (1-99)%: ";
+        cin >> porcentajeDescuento;
+        if (porcentajeDescuento < 1 || porcentajeDescuento > 99) {
+            cout << "Porcentaje invalido. Intentalo de nuevo.\n";
+        }
+    } while (porcentajeDescuento < 1 || porcentajeDescuento > 99);
+
+    double factorDescuento = 1.0 - (porcentajeDescuento / 100.0);
+
+    cout << "\n--- REGLAS DE DESCUENTO ---\n";
+    cout << "1. Aplicar a TODOS los productos.\n";
+    cout << "2. Aplicar solo si la cantidad es mayor a un limite.\n";
+    cout << "Selecciona una opcion 1 o 2: ";
+    cin >> opcionRegla;
+
+    if (opcionRegla == 2) {
+        cout << "Introduce la cantidad minima para aplicar el descuento: ";
+        cin >> cantidadMinima;
+    }
+
+    ifstream entrada("productos.txt");
+    ofstream salida("productos_descuento.txt");
+
+    if (!entrada.is_open() || !salida.is_open()) {
+        cerr << "Error al abrir los archivos de texto para el descuento." << endl;
+        return 1;
+    }
+
+    vector<Producto> lista;
+    Producto p;
+
+    string lineaTitulos;
+    getline(entrada, lineaTitulos); 
+
+    while (entrada >> p.nombre >> p.precio >> p.cantidad) {
+        if (opcionRegla == 1) {
+            p.precio *= factorDescuento;
+        } 
+        else if (opcionRegla == 2 && p.cantidad > cantidadMinima) {
+            p.precio *= factorDescuento;
+        }
+        lista.push_back(p);
+    }
+
+    salida << fixed << setprecision(2);
+    salida << "Producto Precio Cantidad" << endl;
+
+    for (auto &prod : lista) {
+        salida << prod.nombre << "   "
+               << prod.precio << "   "
+               << prod.cantidad << endl;
+    }
+
+    entrada.close();
+    salida.close();
+
+    cout << "\n¡Archivo 'productos_descuento.txt' generado con exito!\n";
+
+//------------------------------------------------------------------------------------------------
+    cout << "\n--- SISTEMA DE COTIZACION Y VENTAS ---\n";
+    
+    ifstream archivoDescuento("productos_descuento.txt");
+    if (!archivoDescuento.is_open()) {
+        cerr << "Error al abrir el archivo 'productos_descuento.txt'." << endl;
+        return 1;
+    }
+
+    vector<Producto> inventarioActualizado;
+    Producto prodDescuento;
+    string titulosDescuento;
+    
+   
+    getline(archivoDescuento, titulosDescuento);
+
+    
+    while (archivoDescuento >> prodDescuento.nombre >> prodDescuento.precio >> prodDescuento.cantidad) {
+        inventarioActualizado.push_back(prodDescuento);
+    }
+    archivoDescuento.close();
+
+    
+    cout << "\nProductos disponibles en tienda (con descuento aplicado):\n";
+    cout << left << setw(15) << "Producto" << setw(10) << "Precio" << "Stock Disponible\n";
+    cout << "----------------------------------------------\n";
+    for (const auto &item : inventarioActualizado) {
+        cout << left << setw(15) << item.nombre 
+             << fixed << setprecision(2) << setw(10) << item.precio 
+             << item.cantidad << "\n";
+    }
+
+    
+    string productoBuscado;
+    int cantidadSolicitada;
+    bool encontrado = false;
+
+    cout << "\nIntroduce el nombre del producto que deseas comprar: ";
+    cin >> productoBuscado;
+
+    for (const auto &item : inventarioActualizado) {
+        if (item.nombre == productoBuscado) {
+            encontrado = true;
+            
+            cout << "Introduce la cantidad que vas a llevar: ";
+            cin >> cantidadSolicitada;
+
+            
+            if (cantidadSolicitada <= 0) {
+                cout << "Cantidad invalida.\n";
+            } 
+            else if (cantidadSolicitada > item.cantidad) {
+                cout << "Lo sentimos, no hay suficiente stock. Solo quedan " << item.cantidad << " unidades.\n";
+            } 
+            else {
+                double totalPagar = item.precio * cantidadSolicitada;
+                cout << "\n--- RESUMEN DE TU PEDIDO ---\n";
+                cout << "Producto: " << item.nombre << "\n";
+                cout << "Cantidad: " << cantidadSolicitada << " unidades\n";
+                cout << "Precio unitario (c/desc): $" << item.precio << "\n";
+                cout << "Total a pagar: $" << fixed << setprecision(2) << totalPagar << "\n";
+            }
+            break; 
+        }
+    }
+
+    if (!encontrado) {
+        cout << "El producto '" << productoBuscado << "' no se encuentra en el catálogo.\n";
+    }
+
+    return 0;
+}
