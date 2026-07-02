@@ -1,1 +1,75 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <ctime>
 
+using namespace std;
+
+class Personaje {
+private:
+    string nombre;
+    int nivel;
+    string oficio;
+
+public:
+    Personaje() : nombre("Sin nombre"), nivel(0), oficio("Ninguno") {
+        cout << "Constructor por defecto ejecutado" << endl;
+    }
+
+    // Constructor con parámetros
+    Personaje(string nombre) : nombre(nombre) {
+        
+        this->nivel = rand() % 50 + 1; 
+        
+        
+        string listaOficios[6] = {"Granjero", "Jardinero", "Minero", "Pescador", "Herrero", "Lenador"};
+        this->oficio = listaOficios[rand() % 6]; 
+        
+        cout << "Constructor con parametros ejecutado" << endl;
+    }
+
+    // Métodos getters
+    string getNombre() { return this->nombre; }
+    int getNivel() { return this->nivel; }
+    string getOficio() { return this->oficio; }
+
+    // Destructor
+    ~Personaje() {
+        cout << "Destructor ejecutado para: " << nombre << endl;
+    }
+};
+
+int main() {
+    // Inicializar la semilla para los números aleatorios
+    srand(time(nullptr));
+
+    cout << "=== SIMULADOR DE GREMIO DE OFICIOS ===\n" << endl;
+
+    string nombre1, nombre2, nombre3;
+
+    
+    cout << "Ingresa el nombre de la persona 1: ";
+    getline(cin, nombre1);
+    Personaje p1(nombre1);
+
+    
+    cout << "Ingresa el nombre de la persona 2: ";
+    getline(cin, nombre2);
+    Personaje p2(nombre2);
+
+    
+    cout << "Ingresa el nombre de la persona 3: ";
+    getline(cin, nombre3);
+    Personaje p3(nombre3);
+
+    
+    cout << "\n--- REGISTRO DEL GREMIO ---" << endl;
+    cout << "Registro: " << p1.getNombre() << " | Nivel: " << p1.getNivel() << " | Oficio: " << p1.getOficio() << endl;
+    cout << "Registro: " << p2.getNombre() << " | Nivel: " << p2.getNivel() << " | Oficio: " << p2.getOficio() << endl;
+    cout << "Registro: " << p3.getNombre() << " | Nivel: " << p3.getNivel() << " | Oficio: " << p3.getOficio() << endl;
+    
+    cout << "\nCerrando el registro del gremio...\n" << endl;
+
+    
+    return 0;
+}
