@@ -1,1 +1,23 @@
+#include <iostream>
+int main() {
 
+    int n;
+    int contadorPuntos = 0;
+    std::cout << "¿Cuantos puntos desea evaluar?: ";
+    if (!(std::cin >> n)) return 1;
+    for (int i = 1; i <= n; ++i) {
+        double px, py;
+        std::cout << "\nPunto " << i << " (x y): ";
+        std::cin >> px >> py;
+        double distC1 = (px - 5) * (px - 5) + (py - 4) * (py - 
+4);
+        double distC2 = (px + 5) * (px + 5) + (py + 4) * (py + 
+4);
+        if (distC1 <= 4.0 || distC2 <= 9.0) {
+            contadorPuntos++;
+        }
+    }
+    std::cout << "\nTotal de puntos dentro: " << contadorPuntos 
+<< std::endl;
+    return 0;
+}
