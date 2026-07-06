@@ -1,1 +1,90 @@
+#include <iostream>
+#include <vector>
+#include <chrono>
 
+using namespace std;
+using namespace std::chrono;
+
+// --- Funciones de Merge Sort ---
+void merge(vector<int>& arr, int izq, int medio, int der) {
+    int n1 = medio - izq + 1;
+    int n2 = der - medio;
+    vector<int> L(n1), R(n2);
+
+    for (int i = 0; i < n1; i++) L[i] = arr[izq + i];
+    for (int j = 0; j < n2; j++) R[j] = arr[medio + 1 + j];
+
+    int i = 0, j = 0, k = izq;
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            arr[k] = L[i];
+            i++;
+        } else {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+
+    while (i < n1) { arr[k] = L[i]; i++; k++; }
+    while (j < n2) { arr[k] = R[j]; j++; k++; }
+}
+
+void mergeSort(vector<int>& arr, int izq, int der) {
+    if (izq < der) {
+        int medio = izq + (der - izq) / 2;
+        mergeSort(arr, izq, medio);
+        mergeSort(arr, medio + 1, der);
+        merge(arr, izq, medio, der);
+    }
+}
+
+// --- Función de Bubble Sort ---
+void bubbleSort(vector<int>& arr) {
+    int n = arr.size();
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                swap(arr[j], arr[j + 1]);
+            }
+        }
+    }
+}
+
+int main() {
+    int n;
+    cout << "--- Comparación: Merge Sort vs Bubble Sort ---\n";
+    cout << "Ingrese la cantidad de elementos a ordenar: ";
+    cin >> n;
+
+    vector<int> original(n);
+    cout << "Ingrese los elementos (o genere datos aleatorios en su mente):\n";
+    for (int i = 0; i < n; i++) cin >> original[i];
+
+    // Copias independientes para cada algoritmo
+    vector<int> arrMerge = original;
+    vector<int> arrBubble = original;
+
+    // Medición de Merge Sort
+    auto inicioMerge = high_resolution_clock::now();
+    mergeSort(arrMerge, 0, n - 1);
+    auto finMerge = high_resolution_clock::now();
+    auto duracionMerge = duration_cast<microseconds>(finMerge - inicioMerge);
+
+    // Medición de Bubble Sort
+    auto inicioBubble = high_resolution_clock::now();
+    bubbleSort(arrBubble);
+    auto finBubble = high_resolution_clock::now();
+    auto duracionBubble = duration_cast<microseconds>(finBubble - inicioBubble);
+
+    cout << "\nTiempo de Merge Sort: " << duracionMerge.count() << " microsegundos.\n";
+    cout << "Tiempo de Bubble Sort: " << duracionBubble.count() << " microsegundos.\n";
+
+    if (duracionMerge.count() < duracionBubble.count()) {
+        cout << "-> Merge Sort fue más eficiente.\n";
+    } else {
+        cout << "-> Bubble Sort fue más rápido (común en arreglos muy pequeños).\n";
+    }
+
+    return 0;
+}
