@@ -1,1 +1,30 @@
+#include <iostream>
 
+using namespace std;
+
+int calcularMCD(int a, int b) {
+    // Si algún número es negativo, lo pasamos a positivo
+    if (a < 0) a = -a;
+    if (b < 0) b = -b;
+
+    // Algoritmo de Euclides
+    while (b != 0) {
+        int residuo = a % b;
+        a = b;
+        b = residuo;
+    }
+    return a;
+}
+
+int main() {
+    int num1, num2;
+    cout << "--- Calculadora de MCD ---\n";
+    cout << "Ingrese el primer número: ";
+    cin >> num1;
+    cout << "Ingrese el segundo número: ";
+    cin >> num2;
+
+    cout << "El MCD es: " << calcularMCD(num1, num2) << "\n";
+
+    return 0;
+}
