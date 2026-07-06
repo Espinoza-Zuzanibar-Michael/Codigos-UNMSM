@@ -1,0 +1,26 @@
+#include <iostream>
+#include <string>
+
+int main() {
+    std::string n_str;
+    std::cout << "Introduce un numero: ";
+    std::cin >> n_str;
+
+    int longitud = n_str.length();
+    int suma_digitos = 0;
+
+    // Sumar el valor numérico de cada caracter
+    for (char c : n_str) {
+        suma_digitos += (c - '0'); 
+    }
+
+    int promedio = suma_digitos / longitud;
+    int rotaciones = promedio % longitud;
+
+    // Rotamos utilizando subcadenas (substr)
+    std::string resultado = n_str.substr(rotaciones) + n_str.substr(0, rotaciones);
+
+    std::cout << "Numero rotado: " << resultado << "\n";
+
+    return 0;
+}
