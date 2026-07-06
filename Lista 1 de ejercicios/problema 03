@@ -1,0 +1,14 @@
+#include <iostream>
+
+int main() {
+    int suma = 0;
+    
+    // Bucle para encontrar y acumular los primeros 20 múltiplos
+    for (int i = 1; i <= 20; i++) {
+        suma += 3 * i;
+    }
+    
+    std::cout << "La suma de los 20 primeros multiplos de 3 es: " << suma << "\n";
+    
+    return 0;
+}
