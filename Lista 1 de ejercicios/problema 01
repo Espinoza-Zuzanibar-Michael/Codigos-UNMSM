@@ -1,0 +1,19 @@
+#include <iostream>
+
+int main() {
+    // Generar e imprimir la tabla del 3
+    std::cout << "Tabla del 3:\n";
+    for (int i = 1; i <= 12; i++) {
+        std::cout << "3 x " << i << " = " << 3 * i << "\n";
+    }
+    
+    std::cout << "---------------\n";
+    
+    // Generar e imprimir la tabla del 9
+    std::cout << "Tabla del 9:\n";
+    for (int i = 1; i <= 12; i++) {
+        std::cout << "9 x " << i << " = " << 9 * i << "\n";
+    }
+
+    return 0;
+}
