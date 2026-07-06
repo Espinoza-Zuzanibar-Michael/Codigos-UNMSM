@@ -1,0 +1,42 @@
+#include <iostream>
+
+int main() {
+    double num;
+    std::cout << "Ingrese un numero positivo (0 para terminar): ";
+    std::cin >> num;
+
+    if (num == 0) {
+        std::cout << "No se ingresaron datos para evaluar.\n";
+        return 0; // Termina la ejecución tempranamente
+    }
+
+    // Inicialización a partir del primer dato capturado
+    double menor = num;
+    double mayor = num;
+    double suma = 0;
+    int contador = 0;
+
+    while (num != 0) {
+        if (num > 0) {
+            suma += num;
+            contador++;
+            
+            if (num < menor) menor = num;
+            if (num > mayor) mayor = num;
+        } else {
+            std::cout << "Error: Ingrese solo numeros positivos.\n";
+        }
+        
+        std::cout << "Ingrese otro numero (0 para terminar): ";
+        std::cin >> num;
+    }
+
+    double promedio = suma / contador;
+    
+    std::cout << "\n--- Resultados ---\n";
+    std::cout << "El menor numero es: " << menor << "\n";
+    std::cout << "El mayor numero es: " << mayor << "\n";
+    std::cout << "El promedio es: " << promedio << "\n";
+
+    return 0;
+}
