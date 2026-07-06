@@ -1,0 +1,20 @@
+#include <iostream>
+#include <iomanip> // Necesario para std::setw
+
+int main() {
+    int n;
+    
+    std::cout << "Introduzca un numero: ";
+    std::cin >> n;
+    
+    std::cout << "La tabla de multiplicar del " << n << " es:\n";
+    
+    // Bucle para imprimir y alinear
+    for (int i = 1; i <= 10; i++) {
+        std::cout << n << " x " 
+                  << std::setw(2) << i << " = " 
+                  << std::setw(2) << (n * i) << "\n";
+    }
+
+    return 0;
+}
