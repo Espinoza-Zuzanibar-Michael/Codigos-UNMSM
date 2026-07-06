@@ -1,0 +1,31 @@
+#include <iostream>
+
+int main() {
+    int n, m;
+    
+    std::cout << "Introduce el valor inicial (n): ";
+    std::cin >> n;
+    std::cout << "Introduce el valor final (m): ";
+    std::cin >> m;
+    
+    int a = 0;
+    int b = 1;
+    int siguiente;
+    
+    std::cout << "Serie de Fibonacci entre " << n << " y " << m << ":\n";
+    
+    // Generación y filtrado de la serie
+    while (a <= m) {
+        if (a >= n) {
+            std::cout << a << " ";
+        }
+        
+        siguiente = a + b;
+        a = b;
+        b = siguiente;
+    }
+    
+    std::cout << "\n";
+    
+    return 0;
+}
