@@ -1,1 +1,27 @@
+#include <iostream>
 
+using namespace std;
+
+int puntosCalidad(int promedio) {
+    if (promedio >= 90 && promedio <= 100) return 4;
+    else if (promedio >= 80 && promedio <= 89) return 3;
+    else if (promedio >= 70 && promedio <= 79) return 2;
+    else if (promedio >= 60 && promedio <= 69) return 1;
+    else return 0; // Promedio menor a 60
+}
+
+int main() {
+    int promedioEstudiante;
+    cout << "--- Sistema de Puntos de Calidad ---\n";
+    cout << "Ingrese el promedio del estudiante (0-100): ";
+    cin >> promedioEstudiante;
+
+    if (promedioEstudiante < 0 || promedioEstudiante > 100) {
+        cout << "Promedio fuera de rango.\n";
+    } else {
+        int puntos = puntosCalidad(promedioEstudiante);
+        cout << "Puntos de calidad otorgados: " << puntos << "\n";
+    }
+
+    return 0;
+}
