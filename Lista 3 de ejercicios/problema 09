@@ -1,1 +1,43 @@
+#include <iostream>
+#include <vector>
 
+using namespace std;
+
+int main() {
+    int n;
+    cout << "--- Multiplicación de Matrices Cuadradas ---\n";
+    cout << "Ingrese la dimensión de las matrices (n): ";
+    cin >> n;
+
+    if (n <= 0) return 1;
+
+    vector<vector<int>> A(n, vector<int>(n));
+    vector<vector<int>> B(n, vector<int>(n));
+    // Matriz de resultados inicializada en ceros
+    vector<vector<int>> C(n, vector<int>(n, 0)); 
+
+    cout << "\nIngrese los elementos de la Matriz A:\n";
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++) cin >> A[i][j];
+
+    cout << "\nIngrese los elementos de la Matriz B:\n";
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++) cin >> B[i][j];
+
+    // Lógica de multiplicación
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            for (int k = 0; k < n; k++) {
+                C[i][j] += A[i][k] * B[k][j];
+            }
+        }
+    }
+
+    cout << "\nMatriz Resultado C (A x B):\n";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) cout << C[i][j] << " ";
+        cout << "\n";
+    }
+
+    return 0;
+}
