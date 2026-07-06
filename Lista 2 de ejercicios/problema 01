@@ -1,1 +1,27 @@
-
+#include <iostream>
+int main() {
+    int n;
+    
+    do {
+        std::cout << "Introduzca un numero natural (n >= 0): ";
+        if (!(std::cin >> n)) {
+            std::cin.clear();
+            while (std::cin.get() != '\n');
+            n = -1;
+        }
+        if (n < 0) {
+            std::cout << "Error: El numero debe ser mayor o 
+igual a cero." << std::endl;
+        }
+    } while (n < 0);
+    double factorial = 1; // Usamos double para manejar números 
+grandes
+    for (int i = 0; i <= n; ++i) {
+        if (i > 0) {
+factorial *= i;
+}
+std::cout << "El factorial de " << i << " es: " << 
+factorial << std::endl;
+}
+return 0;
+}
