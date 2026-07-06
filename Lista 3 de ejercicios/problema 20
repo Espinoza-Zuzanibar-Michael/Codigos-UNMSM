@@ -1,1 +1,86 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <string>
 
+using namespace std;
+
+struct Estudiante {
+    string nombre;
+    float n1, n2, n3, promedio;
+};
+
+// Función para ordenar estudiantes por promedio (descendente)
+void ordenarPorMerito(vector<Estudiante>& grupo) {
+    for (size_t i = 0; i < grupo.size(); i++) {
+        for (size_t j = 0; j < grupo.size() - i - 1; j++) {
+            if (grupo[j].promedio < grupo[j + 1].promedio) {
+                // Intercambio simple (Bubble Sort)
+                Estudiante temp = grupo[j];
+                grupo[j] = grupo[j + 1];
+                grupo[j + 1] = temp;
+            }
+        }
+    }
+}
+
+// Función para leer el archivo y cargar el vector
+bool cargarGrupo(const string& nombreArchivo, vector<Estudiante>& grupo) {
+    ifstream archivo(nombreArchivo);
+    if (!archivo.is_open()) return false;
+
+    Estudiante est;
+    while (archivo >> est.nombre >> est.n1 >> est.n2 >> est.n3) {
+        est.promedio = (est.n1 + est.n2 + est.n3) / 3.0f;
+        grupo.push_back(est);
+    }
+    archivo.close();
+    return true;
+}
+
+// Función para imprimir en consola un grupo
+void imprimirGrupo(const vector<Estudiante>& grupo, const string& titulo) {
+    cout << "\n--- " << titulo << " (Orden de Merito) ---\n";
+    for (const auto& est : grupo) {
+        cout << est.nombre << " - Promedio: " << est.promedio << "\n";
+    }
+}
+
+int main() {
+    vector<Estudiante> grupoA, grupoB, tercioSuperior;
+
+    if (!cargarGrupo("grupoA.txt", grupoA) || !cargarGrupo("grupoB.txt", grupoB)) {
+        cout << "Error: Asegúrate de crear grupoA.txt y grupoB.txt\n";
+        return 1;
+    }
+
+    // Ordenar ambos grupos por mérito
+    ordenarPorMerito(grupoA);
+    ordenarPorMerito(grupoB);
+
+    // Mostrar en consola
+    imprimirGrupo(grupoA, "Grupo A");
+    imprimirGrupo(grupoB, "Grupo B");
+
+    // Calcular tercio superior (dividiendo el tamaño entre 3)
+    int limiteA = grupoA.size() / 3;
+    int limiteB = grupoB.size() / 3;
+
+    // Si el grupo es muy pequeño pero tiene elementos, al menos pasa 1
+    if (limiteA == 0 && !grupoA.empty()) limiteA = 1;
+    if (limiteB == 0 && !grupoB.empty()) limiteB = 1;
+
+    for (int i = 0; i < limiteA; i++) tercioSuperior.push_back(grupoA[i]);
+    for (int i = 0; i < limiteB; i++) tercioSuperior.push_back(grupoB[i]);
+
+    // Generar nuevo archivo con el tercio superior
+    ofstream archivoSalida("tercio_superior.txt");
+    archivoSalida << "--- TERCIO SUPERIOR ---\n";
+    for (const auto& est : tercioSuperior) {
+        archivoSalida << est.nombre << "\t" << est.promedio << "\n";
+    }
+    archivoSalida.close();
+
+    cout << "\nArchivo 'tercio_superior.txt' generado exitosamente.\n";
+    return 0;
+}
