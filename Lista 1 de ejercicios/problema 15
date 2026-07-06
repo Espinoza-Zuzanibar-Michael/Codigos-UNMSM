@@ -1,0 +1,30 @@
+#include <iostream>
+
+int main() {
+    int n;
+    std::cout << "Ingrese la cantidad de terminos (N): ";
+    std::cin >> n;
+
+    if (n <= 0) {
+        std::cout << "Por favor ingrese un numero natural mayor a 0.\n";
+        return 0;
+    }
+
+    // Usamos long long porque Fibonacci crece muy rápido
+    long long a = 1, b = 1, c;
+
+    std::cout << "Sucesion de Fibonacci:\n";
+    
+    if (n >= 1) std::cout << a << " ";
+    if (n >= 2) std::cout << b << " ";
+
+    for (int i = 3; i <= n; i++) {
+        c = a + b;
+        std::cout << c << " ";
+        a = b;
+        b = c;
+    }
+    
+    std::cout << "\n";
+    return 0;
+}
