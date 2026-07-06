@@ -1,1 +1,61 @@
+#include <iostream>
+#include <vector>
 
+using namespace std;
+
+// Función para ordenar un vector usando Selection Sort
+void ordenarVector(vector<int>& arr) {
+    int n = arr.size();
+    for (int i = 0; i < n - 1; i++) {
+        int indiceMenor = i;
+        // Buscamos el elemento más pequeño en el resto del arreglo
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[indiceMenor]) {
+                indiceMenor = j;
+            }
+        }
+        // Intercambiamos el elemento más pequeño con la posición 'i'
+        if (indiceMenor != i) {
+            int temp = arr[i];
+            arr[i] = arr[indiceMenor];
+            arr[indiceMenor] = temp;
+        }
+    }
+}
+
+// Función para imprimir el vector
+void imprimirVector(const vector<int>& arr) {
+    cout << "{ ";
+    for (int num : arr) {
+        cout << num << " ";
+    }
+    cout << "}\n";
+}
+
+int main() {
+    int n, valor;
+    vector<int> numeros;
+
+    cout << "--- Ordenamiento y Mostrar con Funciones ---\n";
+    cout << "Cantidad de elementos a ingresar: ";
+    cin >> n;
+
+    if (n <= 0) return 1;
+
+    cout << "Ingrese los elementos:\n";
+    for (int i = 0; i < n; i++) {
+        cin >> valor;
+        numeros.push_back(valor);
+    }
+
+    cout << "\nVector original: ";
+    imprimirVector(numeros);
+
+    // Llamada a la función que ordena pasando el vector por referencia
+    ordenarVector(numeros);
+
+    cout << "Vector ordenado: ";
+    imprimirVector(numeros);
+
+    return 0;
+}
