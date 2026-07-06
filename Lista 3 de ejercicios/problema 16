@@ -1,1 +1,52 @@
+#include <iostream>
+#include <vector>
 
+using namespace std;
+
+// Función para particionar el arreglo
+int particion(vector<int>& arr, int inicio, int fin) {
+    int pivote = arr[fin]; // Elegimos el último elemento como pivote
+    int i = (inicio - 1); // Índice del elemento más pequeño
+
+    for (int j = inicio; j <= fin - 1; j++) {
+        // Si el elemento actual es menor o igual al pivote
+        if (arr[j] <= pivote) {
+            i++;
+            swap(arr[i], arr[j]);
+        }
+    }
+    swap(arr[i + 1], arr[fin]); // Colocamos el pivote en su posición final
+    return (i + 1);
+}
+
+// Función recursiva QuickSort
+void quickSort(vector<int>& arr, int inicio, int fin) {
+    if (inicio < fin) {
+        int pi = particion(arr, inicio, fin);
+
+        // Ordenamos los elementos antes y después de la partición
+        quickSort(arr, inicio, pi - 1);
+        quickSort(arr, pi + 1, fin);
+    }
+}
+
+int main() {
+    int n;
+    cout << "--- Ordenamiento QuickSort ---\n";
+    cout << "Cantidad de elementos: ";
+    cin >> n;
+
+    if (n <= 0) return 1;
+
+    vector<int> arr(n);
+    cout << "Ingrese los " << n << " elementos:\n";
+    for (int i = 0; i < n; i++) cin >> arr[i];
+
+    quickSort(arr, 0, n - 1);
+
+    cout << "Arreglo ordenado: ";
+    for (int i = 0; i < n; i++) cout << arr[i] << " ";
+    cout << endl;
+
+    return 0;
+}
