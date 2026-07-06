@@ -1,1 +1,27 @@
-
+#include <iostream>
+#include <iomanip>
+int main() {
+    double base, p_base = 1.0, x;
+    int num, den;
+    std::cout << "Base: "; std::cin >> base;
+    std::cout << "Numerador: "; std::cin >> num;
+    std::cout << "Denominador: "; std::cin >> den;
+Código en Julia:
+    if (den == 0) {
+        std::cout << "Error: Denominador cero." << std::endl;
+        return 1;
+    }
+    int n_abs = (num < 0) ? -num : num;
+    for (int i = 0; i < n_abs; ++i) p_base *= base;
+    if (num < 0) p_base = 1.0 / p_base;
+    x = p_base / den;
+    if (x <= 0) x = 1.0;
+    for (int j = 0; j < 100; ++j) {
+        double f_der = 1.0;
+        for (int k = 0; k < den - 1; ++k) f_der *= x;
+        x = (1.0 / den) * ((den - 1) * x + (p_base / f_der));
+    }
+    std::cout << "El resultado es: " << std::fixed << 
+std::setprecision(6) << x << std::endl;
+    return 0;
+}
