@@ -1,1 +1,43 @@
+#include <iostream>
+#include <vector>
 
+using namespace std;
+
+int main() {
+    int n;
+    bool esSimetrica = true;
+
+    cout << "--- Verificador de Matriz Simétrica ---\n";
+    cout << "Ingrese la dimensión de la matriz cuadrada (n): ";
+    cin >> n;
+
+    if (n <= 0) return 1;
+
+    vector<vector<int>> matriz(n, vector<int>(n));
+
+    cout << "Ingrese los elementos de la matriz:\n";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cin >> matriz[i][j];
+        }
+    }
+
+    // Verificación de simetría
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (matriz[i][j] != matriz[j][i]) {
+                esSimetrica = false;
+                break; // Rompe el bucle interno si encuentra una discrepancia
+            }
+        }
+        if (!esSimetrica) break; // Rompe el bucle externo
+    }
+
+    if (esSimetrica) {
+        cout << "La matriz es SIMÉTRICA." << endl;
+    } else {
+        cout << "La matriz NO es simétrica." << endl;
+    }
+
+    return 0;
+}
