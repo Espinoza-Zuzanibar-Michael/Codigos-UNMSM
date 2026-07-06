@@ -1,1 +1,27 @@
-
+#include <iostream>
+int main() {
+int d1, m1, a1, d2, m2, a2;
+while (true) {
+std::cout << "\nDia fecha 1 (0 para salir): ";
+std::cin >> d1;
+if (d1 == 0) break;
+std::cout << "Mes y año fecha 1: ";
+std::cin >> m1 >> a1;
+std::cout << "Segunda fecha (dia mes año): ";
+std::cin >> d2 >> m2 >> a2;
+if (a1 < a2) std::cout << "La primera es anterior.";
+else if (a1 > a2) std::cout << "La segunda es 
+anterior.";
+else if (m1 < m2) std::cout << "La primera es 
+anterior.";
+else if (m1 > m2) std::cout << "La segunda es 
+anterior.";
+else if (d1 < d2) std::cout << "La primera es 
+anterior.";
+else if (d1 > d2) std::cout << "La segunda es 
+anterior.";
+else std::cout << "Son iguales.";
+std::cout << std::endl;
+}
+return 0;
+}
