@@ -1,1 +1,28 @@
+#include <iostream>
 
+using namespace std;
+
+// La función recibe las direcciones de memoria de las variables
+void intercambiar(int& a, int& b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
+
+int main() {
+    int x, y;
+    cout << "--- Intercambio por Referencia ---\n";
+    cout << "Ingrese el valor de X: ";
+    cin >> x;
+    cout << "Ingrese el valor de Y: ";
+    cin >> y;
+
+    cout << "\nAntes del intercambio: X = " << x << ", Y = " << y << endl;
+    
+    // Al pasar x e y, la función modifica sus valores reales
+    intercambiar(x, y);
+
+    cout << "Después del intercambio: X = " << x << ", Y = " << y << endl;
+
+    return 0;
+}
