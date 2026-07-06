@@ -1,1 +1,41 @@
+#include <iostream>
+#include <fstream>
+#include <string>
 
+using namespace std;
+
+int main() {
+    ifstream archivoEntrada("productos.txt");
+    ofstream archivoSalida("reporte_final.txt");
+
+    int id, cantidad;
+    string nombre;
+    float precio, descuento = 10.0f; // Aplicamos un 10% de descuento como ejemplo
+
+    cout << "--- Gestión de Inventario ---\n";
+
+    if (!archivoEntrada.is_open()) {
+        cout << "Error: Crea 'productos.txt' con el formato: ID Nombre Precio Cantidad\n";
+        return 1;
+    }
+
+    archivoSalida << "--- REPORTE FINAL DE INVENTARIO ---\n";
+    archivoSalida << "ID\tNombre\tPrecioOrig\tPrecioDesc\tCantidad\tTotal\n";
+
+    cout << "Procesando archivo...\n";
+
+    while (archivoEntrada >> id >> nombre >> precio >> cantidad) {
+        float precioConDescuento = precio * (1.0f - (descuento / 100.0f));
+        float total = precioConDescuento * cantidad;
+
+        archivoSalida << id << "\t" << nombre << "\t" << precio << "\t\t" 
+                      << precioConDescuento << "\t\t" << cantidad << "\t\t" << total << "\n";
+    }
+
+    archivoEntrada.close();
+    archivoSalida.close();
+
+    cout << "El reporte ha sido generado en 'reporte_final.txt'.\n";
+
+    return 0;
+}
