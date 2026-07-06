@@ -1,1 +1,17 @@
-
+#include <iostream>
+#include <cmath>
+int main() {
+double a, b, c, d;
+std::cout << "Ingrese los coeficientes (a b c d): ";
+if (!(std::cin >> a >> b >> c >> d)) {
+std::cout << "Error en la entrada." << std::endl;
+return 1;
+}
+}
+// Evaluacion en el intervalo (8, 100)
+for (int x = 9; x < 100; ++x) {
+double res = (a * std::pow(x, 4)) - (b * std::pow(x, 
+3)) + (2 * c * std::pow(x, 2)) - x + d;
+std::cout << "f(" << x << ") = " << res << std::endl;
+}
+return 0;
