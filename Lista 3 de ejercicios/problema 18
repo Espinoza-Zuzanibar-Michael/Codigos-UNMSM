@@ -1,1 +1,50 @@
+#include <iostream>
 
+using namespace std;
+
+int main() {
+    int filas, columnas;
+
+    cout << "--- Matrices Dinámicas con Doble Puntero ---\n";
+    cout << "Número de filas: ";
+    cin >> filas;
+    cout << "Número de columnas: ";
+    cin >> columnas;
+
+    if (filas <= 0 || columnas <= 0) return 1;
+
+    // 1. Reservar memoria para el arreglo de punteros (las filas)
+    int** matriz = new int*[filas];
+    
+    // 2. Reservar memoria para cada fila (las columnas)
+    for (int i = 0; i < filas; i++) {
+        matriz[i] = new int[columnas];
+    }
+
+    cout << "Ingrese los elementos:\n";
+    for (int i = 0; i < filas; i++) {
+        for (int j = 0; j < columnas; j++) {
+            cin >> matriz[i][j];
+        }
+    }
+
+    cout << "\nMatriz ingresada:\n";
+    for (int i = 0; i < filas; i++) {
+        for (int j = 0; j < columnas; j++) {
+            cout << matriz[i][j] << " ";
+        }
+        cout << "\n";
+    }
+
+    // 3. Liberar memoria de cada fila
+    for (int i = 0; i < filas; i++) {
+        delete[] matriz[i];
+    }
+    
+    // 4. Liberar memoria del arreglo principal de punteros
+    delete[] matriz;
+    
+    cout << "Memoria liberada exitosamente.\n";
+
+    return 0;
+}
