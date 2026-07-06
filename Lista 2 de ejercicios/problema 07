@@ -1,1 +1,32 @@
+#include <iostream>
+int main() {
+    const int MAXINTENTOS = 3;
+    int intentos = 0;
+    int d1, m1, a1, d2, m2, a2;
+    while (intentos < MAXINTENTOS) {
+        std::cout << "Intento " << intentos + 1 << "/" << 
+MAXINTENTOS << " - Fecha 1 Dia (0 para salir): ";
 
+        std::cin >> d1;
+        
+        if (d1 == 0) break;
+        std::cout << "Mes y Año: "; std::cin >> m1 >> a1;
+        std::cout << "Fecha 2 - Dia, Mes y Año: "; std::cin >> 
+d2 >> m2 >> a2;
+        if (a1 < a2 || (a1 == a2 && m1 < m2) || (a1 == a2 && m1 
+== m2 && d1 < d2))
+            std::cout << "Resultado: La primera fecha es 
+anterior." << std::endl;
+        else if (a1 == a2 && m1 == m2 && d1 == d2)
+            std::cout << "Resultado: Ambas fechas son iguales." 
+<< std::endl;
+        else
+            std::cout << "Resultado: La segunda fecha es 
+anterior." << std::endl;
+        intentos++;
+        if (intentos == MAXINTENTOS) {
+            std::cout << "Lo siento, ha perdido." << std::endl;
+        }
+    }
+    return 0;
+}
