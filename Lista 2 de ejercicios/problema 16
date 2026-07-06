@@ -1,1 +1,23 @@
-
+#include <iostream>
+int main() {
+    long long n;
+    
+    do {
+        std::cout << "Ingrese un numero entero positivo (N > 
+0): ";
+        if (!(std::cin >> n)) {
+            std::cin.clear();
+            while (std::cin.get() != '\n');
+            n = -1;
+        }
+    } while (n <= 0);
+    int contador = 0;
+    long long aux = n;
+    while (aux > 0) {
+        aux /= 10;
+        contador++;
+    }
+    std::cout << "El numero " << n << " tiene " << contador << 
+" digitos." << std::endl;
+    return 0;
+}
