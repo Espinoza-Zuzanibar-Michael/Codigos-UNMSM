@@ -1,0 +1,33 @@
+#include <iostream>
+#include <cmath>   // Para la función sqrt()
+#include <iomanip> // Para formatear la salida (setw, setprecision)
+
+int main() {
+    int p;
+    std::cout << "Ingrese la cantidad de numeros (P): ";
+    std::cin >> p;
+
+    if (p <= 0) {
+        std::cout << "Por favor ingrese un numero natural mayor a 0.\n";
+        return 0;
+    }
+
+    std::cout << "Numero | Cuadrado | Cubo | Raiz Cuadrada\n";
+    std::cout << "---------------------------------------\n";
+    
+    // Configuramos la salida de la raíz cuadrada a 4 decimales
+    std::cout << std::fixed << std::setprecision(4);
+
+    for (int i = 1; i <= p; i++) {
+        long long cuadrado = (long long)i * i;
+        long long cubo = (long long)i * i * i;
+        double raiz = std::sqrt(i);
+
+        std::cout << std::setw(6) << i << " | " 
+                  << std::setw(8) << cuadrado << " | " 
+                  << std::setw(4) << cubo << " | " 
+                  << raiz << "\n";
+    }
+
+    return 0;
+}
