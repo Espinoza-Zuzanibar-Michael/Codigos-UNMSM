@@ -1,1 +1,28 @@
-
+#include <iostream>
+#include <string>
+#include <algorithm>
+int main() {
+    long long n;
+    std::cout << "Ingrese un numero decimal positivo: ";
+    
+    if (!(std::cin >> n) || n < 0) {
+        std::cout << "Entrada no valida." << std::endl;
+        return 1;
+    }
+    if (n == 0) {
+        std::cout << "El binario es: 0" << std::endl;
+        return 0;
+    }
+    std::string binario = "";
+    long long aux = n;
+    while (aux > 0) {
+        binario += std::to_string(aux % 2);
+        aux /= 2;
+    }
+    // Invertimos la cadena porque los residuos se obtienen al 
+revés
+    std::reverse(binario.begin(), binario.end());
+    std::cout << "El numero " << n << " en binario es: " << 
+binario << std::endl;
+return 0;
+}
