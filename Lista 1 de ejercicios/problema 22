@@ -1,0 +1,21 @@
+#include <iostream>  // Entrada y salida
+#include <cmath>     
+// Para pow() y sqrt()
+#include <iomanip>   // Para formato de tabla
+using namespace std;
+int main() {
+// Encabezado de la tabla
+cout << fixed << setprecision(3);
+cout << "N\t\tN^2\t\tN^0.5" << endl;
+// Bucle desde 1.0 hasta 1.1 con incremento de 0.001
+for (double N = 1.0; N <= 1.1; N += 0.001) {
+double cuadrado = pow(N, 2);   // N^2
+double raiz = pow(N, 0.5);     
+// N^0.5 (raíz cuadrada)
+// Imprimimos cada fila
+cout << N << "\t\t"
+<< cuadrado << "\t\t"
+<< raiz << endl;
+}
+return 0;  // Fin del programa
+}
