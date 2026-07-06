@@ -5,7 +5,7 @@
 using namespace std;
 using namespace std::chrono;
 
-// --- Funciones de Merge Sort ---
+//  Funciones de Merge Sort 
 void merge(vector<int>& arr, int izq, int medio, int der) {
     int n1 = medio - izq + 1;
     int n2 = der - medio;
@@ -39,7 +39,7 @@ void mergeSort(vector<int>& arr, int izq, int der) {
     }
 }
 
-// --- Función de Bubble Sort ---
+//  Función de Bubble Sort 
 void bubbleSort(vector<int>& arr) {
     int n = arr.size();
     for (int i = 0; i < n - 1; i++) {
