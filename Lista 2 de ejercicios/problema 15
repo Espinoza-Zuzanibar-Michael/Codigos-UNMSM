@@ -1,1 +1,19 @@
-
+#include <iostream>
+#include <algorithm>
+int main() {
+double a, b, c, d;
+std::cout << "Ingrese el primer intervalo [a, b]: ";
+std::cin >> a >> b;
+std::cout << "Ingrese el segundo intervalo [c, d]: ";
+std::cin >> c >> d;
+double inicio = std::max(a, c);
+double fin = std::min(b, d);
+if (inicio <= fin) {
+std::cout << "La interseccion es: [" << inicio << ", " 
+<< fin << "]" << std::endl;
+} else {
+std::cout << "La interseccion es el conjunto vacio." << 
+std::endl;
+}
+return 0;
+}
