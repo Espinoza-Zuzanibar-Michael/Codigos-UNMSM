@@ -1,1 +1,26 @@
+#include <iostream>
+#include <string>
+int main() {
+    int cantidad, contadorGemelos = 0;
+    std::cout << "¿Cuantos numeros desea ingresar?: ";
+    if (!(std::cin >> cantidad)) return 1;
+    for (int i = 0; i < cantidad; ++i) {
+        std::string numStr;
+        std::cout << "Ingrese numero: ";
+        std::cin >> numStr;
+        int len = numStr.length();
+        if (len >= 2) {
+            int mitad = len / 2;
+            std::string primera = numStr.substr(0, mitad);
+            std::string segunda = numStr.substr(len - mitad, 
+mitad);
+            if (primera == segunda) {
+                contadorGemelos++;
+            }
+        }
+    }
+    std::cout << "Total de numeros gemelos encontrados: " << 
+contadorGemelos << std::endl;
+    return 0;
+}
 
