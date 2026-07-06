@@ -1,1 +1,39 @@
+#include <iostream>
+int main() {
+unsigned int mes;
+std::cout << "Introduzca el numero del mes (1-12): ";
+if (!(std::cin >> mes)) {
+std::cout << "Error: Entrada no valida." << std::endl;
+return 1;
 
+    }
+    switch (mes) {
+        case 1:  std::cout << "Enero tiene 31 dias." << 
+std::endl; break;
+        case 2:  std::cout << "Febrero tiene 28 o 29 dias." << 
+std::endl; break;
+        case 3:  std::cout << "Marzo tiene 31 dias." << 
+std::endl; break;
+        case 4:  std::cout << "Abril tiene 30 dias." << 
+std::endl; break;
+        case 5:  std::cout << "Mayo tiene 31 dias." << 
+std::endl; break;
+        case 6:  std::cout << "Junio tiene 30 dias." << 
+std::endl; break;
+        case 7:  std::cout << "Julio tiene 31 dias." << 
+std::endl; break;
+        case 8:  std::cout << "Agosto tiene 31 dias." << 
+std::endl; break;
+        case 9:  std::cout << "Septiembre tiene 30 dias." << 
+std::endl; break;
+        case 10: std::cout << "Octubre tiene 31 dias." << 
+std::endl; break;
+        case 11: std::cout << "Noviembre tiene 30 dias." << 
+std::endl; break;
+        case 12: std::cout << "Diciembre tiene 31 dias." << 
+std::endl; break;
+        default: std::cout << "Mes invalido" << std::endl; 
+break;
+    }
+    return 0;
+}
