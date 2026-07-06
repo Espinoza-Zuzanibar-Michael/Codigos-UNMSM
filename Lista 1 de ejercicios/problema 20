@@ -1,0 +1,22 @@
+#include <iostream>
+
+int main() {
+    int n;
+    std::cout << "Introduce el valor de n: ";
+    std::cin >> n;
+
+    if (n <= 0) {
+        std::cout << "El valor de n debe ser un entero positivo.\n";
+        return 0;
+    }
+
+    // Usamos long long por si el usuario introduce un número 'n' muy grande
+    long long suma = 0;
+    for (int i = 1; i <= n; i++) {
+        suma += i;
+    }
+
+    std::cout << "El " << n << "-esimo numero triangular es: " << suma << "\n";
+
+    return 0;
+}
