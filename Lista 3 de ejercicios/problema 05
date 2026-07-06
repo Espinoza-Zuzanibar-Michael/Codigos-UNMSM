@@ -1,1 +1,32 @@
+#include <iostream>
 
+using namespace std;
+
+// Función para calcular el factorial
+long long calcularFactorial(int n) {
+    if (n < 0) return -1; // Manejo básico de error
+    
+    long long factorial = 1;
+    for (int i = 1; i <= n; i++) {
+        factorial *= i;
+    }
+    return factorial;
+}
+
+int main() {
+    int numero;
+
+    cout << "--- Calculadora de Factorial ---\n";
+    cout << "Ingrese un número entero no negativo: ";
+    cin >> numero;
+
+    long long resultado = calcularFactorial(numero);
+
+    if (resultado == -1) {
+        cout << "El factorial no está definido para números negativos." << endl;
+    } else {
+        cout << "El factorial de " << numero << " es: " << resultado << endl;
+    }
+
+    return 0;
+}
