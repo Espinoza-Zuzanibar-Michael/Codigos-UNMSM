@@ -1,0 +1,29 @@
+#include <iostream>
+
+int main() {
+    int n;
+    std::cout << "Ingrese un numero natural positivo: ";
+    std::cin >> n;
+
+    if (n <= 0) {
+        std::cout << "El numero debe ser un natural positivo.\n";
+        return 0;
+    }
+
+    int suma_divisores = 0;
+    
+    // Un divisor propio jamas superara la mitad del numero
+    for (int i = 1; i <= n / 2; i++) {
+        if (n % i == 0) {
+            suma_divisores += i;
+        }
+    }
+
+    if (suma_divisores == n) {
+        std::cout << n << " es un numero perfecto.\n";
+    } else {
+        std::cout << n << " no es un numero perfecto.\n";
+    }
+
+    return 0;
+}
