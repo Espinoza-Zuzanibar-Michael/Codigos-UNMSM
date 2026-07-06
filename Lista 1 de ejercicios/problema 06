@@ -1,0 +1,32 @@
+#include <iostream>
+#include <cmath>
+
+int main() {
+    double grados;
+    
+    do {
+        std::cout << "Introduce un angulo (0 a 360 grados): ";
+        std::cin >> grados;
+        if (grados < 0 || grados > 360) {
+            std::cout << "Error: Fuera de los limites.\n";
+        }
+    } while (grados < 0 || grados > 360);
+
+    // M_PI es la constante de pi en cmath
+    double x = grados * M_PI / 180.0;
+    
+    double seno_aprox = 0.0;
+    double termino = x;
+    int n = 1;
+
+    // Calculamos los terminos iterativamente hasta alcanzar la precision deseada
+    while (std::abs(termino) > 1e-6) {
+        seno_aprox += termino;
+        termino *= (-x * x) / ((2 * n) * (2 * n + 1));
+        n++;
+    }
+
+    std::cout << "El seno aproximado es: " << seno_aprox << "\n";
+
+    return 0;
+}
