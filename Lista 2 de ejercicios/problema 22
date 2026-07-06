@@ -1,1 +1,22 @@
+#include <iostream>
+int main() {
+    int n;
+    std::cout << "Ingrese el numero de filas: ";
+    if (!(std::cin >> n) || n <= 0) {
+        std::cout << "Entrada no valida." << std::endl;
+        return 1;
+    }
+    for (int i = 1; i <= n; ++i) {
+        // Parte ascendente
+        for (int j = 0; j < i; ++j) {
+            std::cout << (i + j) % 10 << " ";
+        }
+        // Parte descendente
+        for (int j = i - 2; j >= 0; --j) {
+            std::cout << (i + j) % 10 << " ";
+        }
+        std::cout << std::endl;
+    }
+    return 0;
+}
 
