@@ -1,0 +1,23 @@
+#include <iostream>
+
+int main() {
+    int contador_anios = 0;
+    int contador_bisiestos = 0;
+    int anio;
+
+    while (contador_anios < 10 && contador_bisiestos < 3) {
+        std::cout << "Introduce un ano: ";
+        std::cin >> anio;
+        contador_anios++;
+
+        if ((anio % 4 == 0 && anio % 100 != 0) || (anio % 400 == 0)) {
+            std::cout << anio << " es un ano bisiesto.\n";
+            contador_bisiestos++;
+        } else {
+            std::cout << anio << " no es un ano bisiesto.\n";
+        }
+    }
+
+    std::cout << "Programa finalizado.\n";
+    return 0;
+}
