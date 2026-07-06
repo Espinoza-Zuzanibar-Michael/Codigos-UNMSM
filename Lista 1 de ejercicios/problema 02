@@ -1,0 +1,28 @@
+#include <iostream>
+
+int main() {
+    int n;
+    int suma_pares = 0, suma_impares = 0, suma_multiplos_5 = 0;
+
+    std::cout << "Introduce un número entero: ";
+    std::cin >> n;
+
+    // Iteramos desde 1 hasta n
+    for (int i = 1; i <= n; i++) {
+        if (i % 2 == 0) {
+            suma_pares += i;
+        } else {
+            suma_impares += i;
+        }
+
+        if (i % 5 == 0) {
+            suma_multiplos_5 += i;
+        }
+    }
+
+    std::cout << "Suma de pares: " << suma_pares << "\n";
+    std::cout << "Suma de impares: " << suma_impares << "\n";
+    std::cout << "Suma de múltiplos de 5: " << suma_multiplos_5 << "\n";
+
+    return 0;
+}
