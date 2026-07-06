@@ -1,1 +1,41 @@
+#include <iostream>
+#include <fstream>
+#include <string>
 
+using namespace std;
+
+int main() {
+    // Abrimos el archivo en modo lectura
+    ifstream archivo("estudiantes.txt");
+    string nombre;
+    float nota;
+    float sumaNotas = 0.0f;
+    int contador = 0;
+
+    cout << "--- Promedio General desde Archivo ---\n";
+
+    if (!archivo.is_open()) {
+        cout << "Error: No se pudo abrir el archivo 'estudiantes.txt'. Asegúrate de crearlo." << endl;
+        return 1;
+    }
+
+    cout << "Leyendo datos...\n";
+    // Leemos línea por línea hasta el final del archivo
+    while (archivo >> nombre >> nota) {
+        cout << "Estudiante: " << nombre << " | Nota: " << nota << endl;
+        sumaNotas += nota;
+        contador++;
+    }
+
+    archivo.close();
+
+    if (contador > 0) {
+        float promedio = sumaNotas / contador;
+        cout << "\nSe procesaron " << contador << " estudiantes." << endl;
+        cout << "El promedio general es: " << promedio << endl;
+    } else {
+        cout << "El archivo estaba vacío." << endl;
+    }
+
+    return 0;
+}
