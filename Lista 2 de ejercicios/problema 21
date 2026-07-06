@@ -1,1 +1,18 @@
-
+#include <iostream>
+int main() {
+long long n, invertido = 0;
+std::cout << "Ingrese un numero entero positivo: ";
+if (!(std::cin >> n) || n < 0) {
+std::cout << "Entrada no valida." << std::endl;
+return 1;
+}
+long long aux = n;
+while (aux > 0) {
+int digito = aux % 10;
+invertido = (invertido * 10) + digito;
+aux /= 10;
+}
+std::cout << "El numero resultante es: " << invertido << 
+std::endl;
+return 0;
+}
