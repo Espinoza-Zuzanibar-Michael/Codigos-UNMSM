@@ -1,1 +1,28 @@
+#include <iostream>
 
+using namespace std;
+
+int invertirDigitos(int numero) {
+    int invertido = 0;
+    while (numero > 0) {
+        int digito = numero % 10;
+        invertido = (invertido * 10) + digito;
+        numero /= 10;
+    }
+    return invertido;
+}
+
+int main() {
+    int num;
+    cout << "--- Invertir Dígitos ---\n";
+    cout << "Ingrese un número entero positivo: ";
+    cin >> num;
+
+    if (num < 0) {
+        cout << "Por favor ingrese un número positivo.\n";
+    } else {
+        cout << "Número invertido: " << invertirDigitos(num) << "\n";
+    }
+
+    return 0;
+}
