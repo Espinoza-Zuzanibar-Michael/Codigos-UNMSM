@@ -1,0 +1,25 @@
+#include <iostream>
+
+int main() {
+    int cantidad;
+    std::cout << "Ingrese la cantidad de dinero en euros: ";
+    std::cin >> cantidad;
+
+    // Al operar con enteros en C++, el símbolo '/' realiza automáticamente una división entera
+    int billetes_20 = cantidad / 20;
+    int resto = cantidad % 20;
+
+    int billetes_10 = resto / 10;
+    resto %= 10;
+
+    int billetes_5 = resto / 5;
+    int billetes_1 = resto % 5;
+
+    std::cout << "\nDistribucion optima:\n";
+    std::cout << "Billetes de 20: " << billetes_20 << "\n";
+    std::cout << "Billetes de 10: " << billetes_10 << "\n";
+    std::cout << "Billetes de 5: " << billetes_5 << "\n";
+    std::cout << "Billetes de 1: " << billetes_1 << "\n";
+
+    return 0;
+}
