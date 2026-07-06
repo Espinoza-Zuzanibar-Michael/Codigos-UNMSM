@@ -1,0 +1,50 @@
+#include <iostream>
+#include <iomanip> // Para dar formato a los porcentajes
+
+int main() {
+    int total = 0, c_A = 0, c_B = 0;
+    int c_ambos = 0, c_solo_A = 0, c_solo_B = 0, c_ninguno = 0;
+    int voto_A, voto_B;
+
+    std::cout << "Encuesta. Ingrese -1 en Producto A para finalizar.\n";
+
+    while (true) {
+        std::cout << "Acepta producto A? (1/0 o -1 para salir): ";
+        std::cin >> voto_A;
+        
+        if (voto_A == -1) break;
+
+        std::cout << "Acepta producto B? (1/0): ";
+        std::cin >> voto_B;
+
+        total++;
+        if (voto_A == 1) c_A++;
+        if (voto_B == 1) c_B++;
+
+        if (voto_A == 1 && voto_B == 1) {
+            c_ambos++;
+        } else if (voto_A == 1 && voto_B == 0) {
+            c_solo_A++;
+        } else if (voto_A == 0 && voto_B == 1) {
+            c_solo_B++;
+        } else {
+            c_ninguno++;
+        }
+    }
+
+    if (total > 0) {
+        // Configuramos la salida para mostrar 2 decimales
+        std::cout << std::fixed << std::setprecision(2);
+        std::cout << "\nTotal encuestados: " << total << "\n";
+        std::cout << "% que acepta A: " << ((double)c_A / total) * 100 << "%\n";
+        std::cout << "% que acepta B: " << ((double)c_B / total) * 100 << "%\n";
+        std::cout << "% que acepta ambos: " << ((double)c_ambos / total) * 100 << "%\n";
+        std::cout << "% que acepta solo A: " << ((double)c_solo_A / total) * 100 << "%\n";
+        std::cout << "% que acepta solo B: " << ((double)c_solo_B / total) * 100 << "%\n";
+        std::cout << "% que acepta ninguno: " << ((double)c_ninguno / total) * 100 << "%\n";
+    } else {
+        std::cout << "No se ingresaron datos.\n";
+    }
+
+    return 0;
+}
