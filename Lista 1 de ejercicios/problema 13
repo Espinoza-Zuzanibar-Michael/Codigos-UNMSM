@@ -1,0 +1,19 @@
+#include <iostream>
+
+int main() {
+    long long suma = 0;
+    
+    // Usamos double para evitar que el número colapse por overflow
+    double producto = 1.0; 
+
+    // Incrementamos de 2 en 2
+    for (int i = 20; i <= 400; i += 2) {
+        suma += i;
+        producto *= i;
+    }
+
+    std::cout << "La suma es: " << suma << "\n";
+    std::cout << "El producto es (en notacion cientifica): " << producto << "\n";
+
+    return 0;
+}
