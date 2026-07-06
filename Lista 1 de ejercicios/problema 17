@@ -1,0 +1,30 @@
+#include <iostream>
+#include <iomanip>
+
+int main() {
+    const int NUM_EMPLEADOS = 50;
+    const double FACTOR_EXTRA = 1.5;
+    double ptas_hora, horas_trabajadas, salario;
+
+    std::cout << "Ingrese el pago por hora ordinaria: ";
+    std::cin >> ptas_hora;
+
+    // Formateamos la salida a 2 decimales para los salarios
+    std::cout << std::fixed << std::setprecision(2);
+
+    for (int contador = 1; contador <= NUM_EMPLEADOS; contador++) {
+        std::cout << "Horas trabajadas por el empleado " << contador << ": ";
+        std::cin >> horas_trabajadas;
+
+        if (horas_trabajadas <= 40) {
+            salario = horas_trabajadas * ptas_hora;
+        } else {
+            double horas_extras = horas_trabajadas - 40;
+            salario = (40 * ptas_hora) + (horas_extras * ptas_hora * FACTOR_EXTRA);
+        }
+
+        std::cout << "-> El salario del empleado " << contador << " es: " << salario << "\n\n";
+    }
+
+    return 0;
+}
