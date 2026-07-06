@@ -1,1 +1,36 @@
+#include <iostream>
+#include <vector>
 
+using namespace std;
+
+int main() {
+    int n;
+    
+    cout << "--- Generador de Matriz Identidad --- \n";
+    cout << "Ingrese el tamaño 'n' de la matriz: ";
+    cin >> n;
+
+    if (n <= 0) {
+        cout << "El tamaño debe ser mayor a 0." << endl;
+        return 1;
+    }
+
+    // Matriz nxn llena de ceros
+    vector<vector<int>> matriz(n, vector<int>(n, 0));
+
+    // Colocamos 1 en la diagonal principal
+    for (int i = 0; i < n; ++i) {
+        matriz[i][i] = 1;
+    }
+
+    // Impresión de la matriz
+    cout << "\nMatriz Identidad (" << n << "x" << n << "):\n";
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            cout << matriz[i][j] << " ";
+        }
+        cout << "\n";
+    }
+
+    return 0;
+}
