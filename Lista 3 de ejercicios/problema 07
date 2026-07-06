@@ -1,1 +1,43 @@
+#include <iostream>
+#include <vector>
 
+using namespace std;
+
+int main() {
+    int n, valor;
+    vector<int> arr;
+
+    cout << "--- Ordenamiento por Inserción ---\n";
+    cout << "Ingrese cantidad de elementos: ";
+    cin >> n;
+
+    if (n <= 0) return 1;
+
+    cout << "Ingrese los " << n << " elementos:\n";
+    for (int i = 0; i < n; i++) {
+        cin >> valor;
+        arr.push_back(valor);
+    }
+
+    // Algoritmo Insertion Sort
+    for (int i = 1; i < n; i++) {
+        int key = arr[i];
+        int j = i - 1;
+
+        // Desplaza los elementos de arr[0..i-1] que son mayores que key
+        // a una posición adelante de su posición actual
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = key;
+    }
+
+    cout << "Vector ordenado: ";
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
