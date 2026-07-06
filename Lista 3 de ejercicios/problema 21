@@ -1,1 +1,57 @@
+#include <iostream>
+#include <vector>
 
+using namespace std;
+
+void ordenarParesImpares(vector<int>& arr) {
+    vector<int> pares, impares;
+
+    // 1. Separar en pares e impares
+    for (int num : arr) {
+        if (num % 2 == 0) pares.push_back(num);
+        else impares.push_back(num);
+    }
+
+    // 2. Ordenar pares (Ascendente)
+    for (size_t i = 0; i < pares.size(); i++) {
+        for (size_t j = i + 1; j < pares.size(); j++) {
+            if (pares[j] < pares[i]) {
+                int temp = pares[i];
+                pares[i] = pares[j];
+                pares[j] = temp;
+            }
+        }
+    }
+
+    // 3. Ordenar impares (Descendente)
+    for (size_t i = 0; i < impares.size(); i++) {
+        for (size_t j = i + 1; j < impares.size(); j++) {
+            if (impares[j] > impares[i]) {
+                int temp = impares[i];
+                impares[i] = impares[j];
+                impares[j] = temp;
+            }
+        }
+    }
+
+    // 4. Unir ambos arreglos sobrescribiendo el original
+    arr.clear();
+    for (int p : pares) arr.push_back(p);
+    for (int i : impares) arr.push_back(i);
+}
+
+int main() {
+    vector<int> numeros = {1, 2, 3, 4, 5, 6};
+
+    cout << "Vector original: ";
+    for (int n : numeros) cout << n << " ";
+    cout << "\n";
+
+    ordenarParesImpares(numeros);
+
+    cout << "Vector modificado: ";
+    for (int n : numeros) cout << n << " ";
+    cout << "\n";
+
+    return 0;
+}
