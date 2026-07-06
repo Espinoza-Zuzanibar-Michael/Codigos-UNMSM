@@ -1,0 +1,73 @@
+#include <iostream>
+#include <vector>
+#include <numeric>
+#include <cmath>
+#include <algorithm>
+#include <iomanip>
+
+// Estructura para agrupar los datos del postulante
+struct Postulante {
+    int id;
+    double nota;
+    bool ingreso;
+};
+
+// Función para el sort (ordenar descendente)
+bool compararNotas(const Postulante& a, const Postulante& b) {
+    return a.nota > b.nota;
+}
+
+int main() {
+    const int N_POSTULANTES = 1000;
+    const int VACANTES = 150;
+    const double NOTA_MINIMA = 120.0;
+
+    std::vector<Postulante> postulantes(N_POSTULANTES);
+    double suma_notas = 0.0;
+
+    // 1. Llenado simulado
+    for (int i = 0; i < N_POSTULANTES; i++) {
+        postulantes[i].id = i + 1;
+        // Genera nota aleatoria entre 50 y 200
+        postulantes[i].nota = 50 + (std::rand() % 151); 
+        postulantes[i].ingreso = false;
+        suma_notas += postulantes[i].nota;
+    }
+
+    // 2. Estadística
+    double media = suma_notas / N_POSTULANTES;
+    double suma_varianza = 0;
+    for (const auto& p : postulantes) {
+        suma_varianza += std::pow(p.nota - media, 2);
+    }
+    double varianza = suma_varianza / N_POSTULANTES;
+
+    // 3. Ordenamiento
+    std::sort(postulantes.begin(), postulantes.end(), compararNotas);
+
+    double max_ingreso = -9999;
+    double min_ingreso = 9999;
+    int admitidos = 0;
+
+    // 4. Asignación
+    for (auto& p : postulantes) {
+        if (admitidos < VACANTES && p.nota >= NOTA_MINIMA) {
+            p.ingreso = true;
+            admitidos++;
+            if (p.nota > max_ingreso) max_ingreso = p.nota;
+            if (p.nota < min_ingreso) min_ingreso = p.nota;
+        }
+    }
+
+    // 5. Resultados
+    std::cout << std::fixed << std::setprecision(2);
+    std::cout << "Media aritmetica: " << media << "\n";
+    std::cout << "Varianza: " << varianza << "\n";
+    if (admitidos > 0) {
+        std::cout << "Total ingresantes: " << admitidos << "\n";
+        std::cout << "Nota maxima de ingreso: " << max_ingreso << "\n";
+        std::cout << "Nota minima de ingreso: " << min_ingreso << "\n";
+    }
+
+    return 0;
+}
