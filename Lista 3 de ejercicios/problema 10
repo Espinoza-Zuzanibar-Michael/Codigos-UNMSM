@@ -1,1 +1,36 @@
+#include <iostream>
 
+using namespace std;
+
+int main() {
+    int n;
+    cout << "--- Vector Dinámico con Apuntadores ---\n";
+    cout << "Ingrese el tamaño del vector: ";
+    cin >> n;
+
+    if (n <= 0) {
+        cout << "Tamaño no válido." << endl;
+        return 1;
+    }
+
+    // Creación dinámica del vector usando el operador 'new'
+    int* vectorDinamico = new int[n];
+
+    cout << "Ingrese los " << n << " elementos:\n";
+    for (int i = 0; i < n; i++) {
+        // Se puede acceder como si fuera un arreglo normal
+        cin >> vectorDinamico[i]; 
+    }
+
+    cout << "Los elementos ingresados son: ";
+    for (int i = 0; i < n; i++) {
+        cout << vectorDinamico[i] << " ";
+    }
+    cout << endl;
+
+    // Es obligatorio liberar la memoria dinámica usando 'delete[]'
+    delete[] vectorDinamico;
+    cout << "Memoria liberada correctamente.\n";
+
+    return 0;
+}
