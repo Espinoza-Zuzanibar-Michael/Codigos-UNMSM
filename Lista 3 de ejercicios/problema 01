@@ -1,1 +1,23 @@
+#include <iostream>
+#include <vector>
 
+using namespace std;
+
+int main() {
+    int n, valor, suma = 0;
+    vector<int> elementos;
+
+    cout << "--- Suma de elementos --- \n";
+    cout << "¿Cuántos elementos tendrá el vector?: ";
+    cin >> n;
+
+    cout << "Ingrese " << n << " números enteros:\n";
+    for (int i = 0; i < n; ++i) {
+        cin >> valor;
+        elementos.push_back(valor);
+        suma += valor; // Acumulamos directamente
+    }
+
+    cout << "La suma total es: " << suma << endl;
+    return 0;
+}
