@@ -1,1 +1,17 @@
-
+#include <iostream>
+int main() {
+int primero, segundo;
+std::cout << "Ingrese el primer numero: ";
+std::cin >> primero;
+std::cout << "Ingrese el segundo numero: ";
+std::cin >> segundo;
+while (primero != segundo) {
+if (primero > segundo) {
+primero = primero - segundo;
+} else {
+segundo = segundo - primero;
+}
+}
+std::cout << "El resultado es: " << primero << std::endl;
+return 0;
+}
