@@ -1,1 +1,26 @@
+#include <iostream>
+long long mcd(long long a, long long b) {
+    return b == 0 ? a : mcd(b, a % b);
+}
+int main() {
+    long long n1, d1, n2, d2;
+    std::cout << "Fraccion 1 (n d): "; std::cin >> n1 >> d1;
+    std::cout << "Fraccion 2 (n d): "; std::cin >> n2 >> d2;
+    // Simplificar iniciales
+    long long c1 = mcd(n1, d1); n1 /= c1; d1 /= c1;
+    long long c2 = mcd(n2, d2); n2 /= c2; d2 /= c2;
+    // Calcular Suma
+    long long sn = (n1 * d2) + (n2 * d1);
+    long long sd = d1 * d2;
+    long long cs = mcd(sn, sd);
+    // Calcular Producto
+    long long pn = n1 * n2;
+    long long pd = d1 * d2;
+    long long cp = mcd(pn, pd);
+    std::cout << "\nSuma: " << sn/cs << "/" << sd/cs << 
+std::endl;
+    std::cout << "Producto: " << pn/cp << "/" << pd/cp << 
+std::endl;
+    return 0;
+}
 
