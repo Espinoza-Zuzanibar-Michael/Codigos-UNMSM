@@ -1,1 +1,43 @@
+#include <iostream>
+#include <vector>
 
+using namespace std;
+
+int main() {
+    int n, valor;
+    vector<int> elementos;
+
+    cout << "--- Máximo y Mínimo en Vector ---\n";
+    cout << "Ingrese la cantidad de elementos: ";
+    cin >> n;
+
+    if (n <= 0) {
+        cout << "El vector está vacío." << endl;
+        return 1;
+    }
+
+    cout << "Ingrese los " << n << " elementos:\n";
+    for (int i = 0; i < n; i++) {
+        cin >> valor;
+        elementos.push_back(valor);
+    }
+
+    // Inicializamos con el primer elemento
+    int maximo = elementos[0];
+    int minimo = elementos[0];
+
+    // Recorremos buscando el mayor y el menor
+    for (int i = 1; i < n; i++) {
+        if (elementos[i] > maximo) {
+            maximo = elementos[i];
+        }
+        if (elementos[i] < minimo) {
+            minimo = elementos[i];
+        }
+    }
+
+    cout << "El valor máximo es: " << maximo << endl;
+    cout << "El valor mínimo es: " << minimo << endl;
+
+    return 0;
+}
