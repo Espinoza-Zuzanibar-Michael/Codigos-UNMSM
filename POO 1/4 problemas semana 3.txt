@@ -1,0 +1,243 @@
+class Reactivo:
+    def __init__(self, codigo, nombre, cantidad, unidad):
+        self.codigo = codigo
+        self.nombre = nombre
+        self.cantidad = cantidad
+        self.unidad = unidad
+
+    def ingresar(self, cantidad):
+        if cantidad > 0:
+            self.cantidad += cantidad
+            print(f"-> Ingresados {cantidad} {self.unidad} de {self.nombre}.")
+        else:
+            print("-> Error: La cantidad a ingresar debe ser estrictamente positiva.")
+
+    def consumir(self, cantidad):
+        if cantidad <= 0:
+            print("-> Error: La cantidad a consumir debe ser estrictamente positiva.")
+        elif cantidad > self.cantidad:
+            print(f"-> Error: Stock insuficiente de {self.nombre}. Stock actual: {self.cantidad} {self.unidad}.")
+        else:
+            self.cantidad -= cantidad
+            print(f"-> Consumidos {cantidad} {self.unidad} de {self.nombre}.")
+
+    def consultar_stock(self):
+        return f"[{self.codigo}] {self.nombre}: {self.cantidad} {self.unidad}"
+
+# --- Datos de prueba y ejecución ---
+if __name__ == "__main__":
+    print("--- PRUEBA PROBLEMA 1 ---")
+    r1 = Reactivo("R001", "Ácido Sulfúrico", 500, "ml")
+    r2 = Reactivo("R002", "Hidróxido de Sodio", 1000, "g")
+    
+    print(r1.consultar_stock())
+    r1.ingresar(200)
+    r1.consumir(800)  # Intento fallido por falta de stock
+    r1.consumir(300)  # Consumo exitoso
+    r1.consumir(-50)  # Intento fallido por cantidad inválida
+    
+    print("Stock Final:")
+    print(r1.consultar_stock())
+    print(r2.consultar_stock())
+
+""" Salida esperada:
+--- PRUEBA PROBLEMA 1 ---
+[R001] Ácido Sulfúrico: 500 ml
+-> Ingresados 200 ml de Ácido Sulfúrico.
+-> Error: Stock insuficiente de Ácido Sulfúrico. Stock actual: 700 ml.
+-> Consumidos 300 ml de Ácido Sulfúrico.
+-> Error: La cantidad a consumir debe ser estrictamente positiva.
+Stock Final:
+[R001] Ácido Sulfúrico: 400 ml
+[R002] Hidróxido de Sodio: 1000 g
+"""
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------
+class CuentaViaje:
+    def __init__(self, titular, saldo_inicial, tarifa):
+        self.titular = titular
+        self.saldo = max(0.0, saldo_inicial)
+        self.tarifa = tarifa
+
+    def recargar(self, monto):
+        if monto > 0:
+            self.saldo += monto
+            print(f"[{self.titular}] Recarga exitosa de S/{monto:.2f}.")
+        else:
+            print(f"[{self.titular}] Error: El monto de recarga debe ser positivo.")
+
+    def pagar_viaje(self):
+        if self.saldo >= self.tarifa:
+            self.saldo -= self.tarifa
+            print(f"[{self.titular}] Viaje pagado. Tarifa: S/{self.tarifa:.2f}.")
+            return True
+        else:
+            print(f"[{self.titular}] Saldo insuficiente. Requiere S/{self.tarifa:.2f}, tiene S/{self.saldo:.2f}.")
+            return False
+
+    def consultar_saldo(self):
+        return f"Cuenta {self.titular} - Saldo actual: S/{self.saldo:.2f}"
+
+# --- Datos de prueba y ejecución ---
+if __name__ == "__main__":
+    print("\n--- PRUEBA PROBLEMA 2 ---")
+    tarifa_general = 2.50
+    cuenta_pasajero_A = CuentaViaje("Pasajero A", 10.0, tarifa_general)
+    cuenta_pasajero_B = CuentaViaje("Pasajero B", 2.0, tarifa_general)
+    
+    # Demostración de independencia y validación de saldo
+    cuenta_pasajero_A.pagar_viaje()
+    cuenta_pasajero_B.pagar_viaje()  # Debe fallar
+    
+    cuenta_pasajero_B.recargar(5.0)
+    cuenta_pasajero_B.pagar_viaje()  # Ahora debe pasar
+    
+    print("\nEstado final:")
+    print(cuenta_pasajero_A.consultar_saldo())
+    print(cuenta_pasajero_B.consultar_saldo())
+
+""" Salida esperada:
+--- PRUEBA PROBLEMA 2 ---
+[Pasajero A] Viaje pagado. Tarifa: S/2.50.
+[Pasajero B] Saldo insuficiente. Requiere S/2.50, tiene S/2.00.
+[Pasajero B] Recarga exitosa de S/5.00.
+[Pasajero B] Viaje pagado. Tarifa: S/2.50.
+
+Estado final:
+Cuenta Pasajero A - Saldo actual: S/7.50
+Cuenta Pasajero B - Saldo actual: S/4.50
+"""
+#-----------------------------------------------------------------------------------------------------------------------------------------------
+class Paciente:
+    def __init__(self, identificacion, nombre):
+        self.identificacion = identificacion
+        self.nombre = nombre
+
+    def __str__(self):
+        return f"{self.nombre} (DNI: {self.identificacion})"
+
+class Turno:
+    def __init__(self, paciente, fecha_hora):
+        self.paciente = paciente
+        self.fecha_hora = fecha_hora
+
+    def __str__(self):
+        return f"[{self.fecha_hora}] - Paciente: {self.paciente}"
+
+class Agenda:
+    def __init__(self):
+        self.turnos = []
+
+    def registrar_turno(self, paciente, fecha_hora):
+        for turno in self.turnos:
+            if turno.fecha_hora == fecha_hora:
+                print(f"Error: El horario {fecha_hora} ya se encuentra ocupado.")
+                return False
+        
+        nuevo_turno = Turno(paciente, fecha_hora)
+        self.turnos.append(nuevo_turno)
+        print(f"Éxito: Turno registrado para {paciente.nombre} a las {fecha_hora}.")
+        return True
+
+    def listar_turnos_paciente(self, identificacion):
+        print(f"\n--- Turnos del paciente DNI: {identificacion} ---")
+        encontrados = [t for t in self.turnos if t.paciente.identificacion == identificacion]
+        
+        if not encontrados:
+            print("No hay turnos registrados.")
+        else:
+            for t in encontrados:
+                print(t)
+
+# --- Datos de prueba y ejecución ---
+if __name__ == "__main__":
+    print("\n--- PRUEBA PROBLEMA 3 ---")
+    agenda = Agenda()
+    p1 = Paciente("12345678", "Ana García")
+    p2 = Paciente("87654321", "Luis Pérez")
+    
+    agenda.registrar_turno(p1, "2026-10-15 09:00")
+    agenda.registrar_turno(p2, "2026-10-15 09:00")  # Debe fallar por duplicidad
+    agenda.registrar_turno(p2, "2026-10-15 09:30")
+    agenda.registrar_turno(p1, "2026-10-16 10:00")
+    
+    agenda.listar_turnos_paciente("12345678")
+    agenda.listar_turnos_paciente("87654321")
+
+""" Salida esperada:
+--- PRUEBA PROBLEMA 3 ---
+Éxito: Turno registrado para Ana García a las 2026-10-15 09:00.
+Error: El horario 2026-10-15 09:00 ya se encuentra ocupado.
+Éxito: Turno registrado para Luis Pérez a las 2026-10-15 09:30.
+Éxito: Turno registrado para Ana García a las 2026-10-16 10:00.
+
+--- Turnos del paciente DNI: 12345678 ---
+[2026-10-15 09:00] - Paciente: Ana García (DNI: 12345678)
+[2026-10-16 10:00] - Paciente: Ana García (DNI: 12345678)
+
+--- Turnos del paciente DNI: 87654321 ---
+[2026-10-15 09:30] - Paciente: Luis Pérez (DNI: 87654321)
+"""
+#-----------------------------------------------------------------------------------------------------------------------------------------------
+class Sensor:
+    def __init__(self, identificador, tipo):
+        self.identificador = identificador
+        self.tipo = tipo
+        self.lecturas = []
+
+    def registrar_lectura(self, valor):
+        self.lecturas.append(valor)
+
+    def calcular_promedio(self):
+        if not self.lecturas:
+            return 0.0
+        return sum(self.lecturas) / len(self.lecturas)
+
+    def estado_alerta(self, umbral):
+        return self.calcular_promedio() > umbral
+
+    def __str__(self):
+        return f"Sensor {self.identificador} ({self.tipo}) - Promedio de lecturas: {self.calcular_promedio():.2f}"
+
+# --- Datos de prueba y ejecución ---
+if __name__ == "__main__":
+    print("\n--- PRUEBA PROBLEMA 4 ---")
+    sensores = [
+        Sensor("S-Temp-01", "Temperatura"),
+        Sensor("S-Hum-01", "Humedad"),
+        Sensor("S-Temp-02", "Temperatura")
+    ]
+    
+    # Lecturas normales
+    sensores[0].registrar_lectura(22.5)
+    sensores[0].registrar_lectura(24.0)
+    sensores[0].registrar_lectura(23.5)
+    
+    sensores[1].registrar_lectura(60.0)
+    sensores[1].registrar_lectura(65.0)
+    
+    # Lecturas críticas (superará el umbral)
+    sensores[2].registrar_lectura(29.0)
+    sensores[2].registrar_lectura(32.5)
+    sensores[2].registrar_lectura(30.0)
+
+    umbral_temp_max = 25.0
+    
+    print(f"Evaluando estado de alerta (Umbral Temperatura: > {umbral_temp_max})")
+    print("-" * 50)
+    for s in sensores:
+        if s.tipo == "Temperatura":
+            if s.estado_alerta(umbral_temp_max):
+                print(f"¡ALERTA CRÍTICA! {s}")
+            else:
+                print(f"Normal: {s}")
+
+""" Salida esperada:
+--- PRUEBA PROBLEMA 4 ---
+Evaluando estado de alerta (Umbral Temperatura: > 25.0)
+--------------------------------------------------
+Normal: Sensor S-Temp-01 (Temperatura) - Promedio de lecturas: 23.33
+¡ALERTA CRÍTICA! Sensor S-Temp-02 (Temperatura) - Promedio de lecturas: 30.50
+"""
+#-----------------------------------------------------------------------------------------------------------------------------------------------
+
