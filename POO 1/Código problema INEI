@@ -1,0 +1,49 @@
+# Inicialización de variables de salida
+CVFH = 0  # Cantidad de varones que fuman y tienen hijos
+CMMH = 0  # Cantidad de mujeres menores de edad con hijos
+CVSF = 0  # Cantidad de varones con estudios superiores que fuman
+CMPNF = 0 # Cantidad de mujeres con educación primaria que no fuman
+CE = 0    # Cantidad total de encuestados
+
+print("=== Sistema de Encuestas INEI ===")
+continuar = 'si'
+
+while continuar.lower() == 'si':
+    CE += 1  # Contador de encuestados
+    
+    print(f"\n--- Datos del Encuestado {CE} ---")
+    # Ingreso de variables de entrada
+    edad = int(input("Ingrese la edad: "))
+    sexo = input("Ingrese el sexo (M para varón / F para mujer): ").upper()
+    fumar = input("¿Fuma? (si / no): ").lower()
+    hijo = int(input("¿Tiene hijos? (1 = Con hijos / 0 = Sin hijos): "))
+    grado_instruccion = input("Grado de instrucción ( secundaria / superior ): ").lower()
+
+    # Estructura condicional basada en el diagrama de flujo
+    if sexo == 'M': 
+        if fumar == 'si':
+            if hijo == 1:
+                CVFH += 1
+            if grado_instruccion == 'superior':
+                CVSF += 1
+                
+    elif sexo == 'F':
+        if edad < 18:
+            if hijo == 1:
+                CMMH += 1
+                
+        if grado_instruccion == 'primaria':
+            if fumar == 'no':
+                CMPNF += 1
+
+    continuar = input("\n¿Desea registrar otra encuesta? (si / no): ")
+
+# Impresión de variables de salida
+print("\n" + "="*40)
+print("RESULTADOS FINALES")
+print("="*40)
+print(f"Varones que fuman y tienen hijos (CVFH): {CVFH}")
+print(f"Mujeres menores de edad con hijos (CMMH): {CMMH}")
+print(f"Varones con estudios superiores que fuman (CVSF): {CVSF}")
+print(f"Mujeres con educación primaria que no fuman (CMPNF): {CMPNF}")
+print(f"Cantidad total de encuestados (CE): {CE}")
